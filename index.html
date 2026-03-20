@@ -1,1 +1,335 @@
+<!DOCTYPE html>
 
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>2022 개정 물리학 — 연습 허브</title>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;600;700;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg: #0b0f17;
+      --surface: #131929;
+      --surface2: #1a2235;
+      --border: #253047;
+      --accent: #4f9eff;
+      --accent2: #ff6b6b;
+      --accent3: #4fd1a0;
+      --accent4: #f5a623;
+      --text: #dce8f8;
+      --text-muted: #6b82a8;
+      --radius: 14px;
+    }
+
+```
+* { box-sizing: border-box; margin: 0; padding: 0; }
+
+body {
+  font-family: 'Noto Sans KR', sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+/* ── HEADER ── */
+header {
+  background: var(--surface);
+  border-bottom: 1px solid var(--border);
+  padding: 0 28px;
+  height: 58px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 200;
+}
+.logo {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--accent);
+  letter-spacing: 0.5px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.logo .badge {
+  background: var(--accent);
+  color: #000;
+  font-size: 0.65rem;
+  padding: 2px 8px;
+  border-radius: 20px;
+  letter-spacing: 0.5px;
+  font-family: 'Noto Sans KR', sans-serif;
+  font-weight: 700;
+  white-space: nowrap;
+}
+.credit {
+  font-size: 0.88rem;
+  color: var(--accent4);
+  font-weight: 700;
+}
+
+/* ── HERO ── */
+.hero {
+  padding: 52px 32px 30px;
+  text-align: center;
+  position: relative;
+}
+.hero::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 50%;
+  transform: translateX(-50%);
+  width: 700px; height: 200px;
+  background: radial-gradient(ellipse at center, rgba(79,158,255,0.10) 0%, transparent 70%);
+  pointer-events: none;
+}
+.hero h1 {
+  font-size: 2.3rem;
+  font-weight: 900;
+  letter-spacing: -0.5px;
+  line-height: 1.2;
+  margin-bottom: 12px;
+}
+.hero h1 em {
+  font-style: normal;
+  color: var(--accent);
+}
+.hero p {
+  color: var(--text-muted);
+  font-size: 0.95rem;
+}
+
+/* ── CARD GRID ── */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+  gap: 20px;
+  padding: 24px 32px 60px;
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 26px 24px 24px;
+  cursor: pointer;
+  transition: transform 0.2s, border-color 0.2s, box-shadow 0.2s;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  min-height: 210px;
+  text-decoration: none;
+  color: inherit;
+}
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  border-radius: var(--radius) var(--radius) 0 0;
+}
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 16px 40px rgba(0,0,0,0.45);
+}
+
+.card[data-theme="blue"]  { border-color: rgba(79,158,255,0.25); }
+.card[data-theme="blue"]::before  { background: var(--accent); }
+.card[data-theme="blue"]:hover  { border-color: rgba(79,158,255,0.7); }
+
+.card[data-theme="red"]   { border-color: rgba(255,107,107,0.25); }
+.card[data-theme="red"]::before   { background: var(--accent2); }
+.card[data-theme="red"]:hover   { border-color: rgba(255,107,107,0.7); }
+
+.card[data-theme="green"] { border-color: rgba(79,209,160,0.25); }
+.card[data-theme="green"]::before { background: var(--accent3); }
+.card[data-theme="green"]:hover { border-color: rgba(79,209,160,0.7); }
+
+.card[data-theme="yellow"]{ border-color: rgba(245,166,35,0.25); }
+.card[data-theme="yellow"]::before{ background: var(--accent4); }
+.card[data-theme="yellow"]:hover{ border-color: rgba(245,166,35,0.7); }
+
+.card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+.card-icon { font-size: 2rem; line-height: 1; }
+.card-num {
+  font-family: 'Space Mono', monospace;
+  font-size: 0.7rem;
+  color: var(--text-muted);
+  letter-spacing: 1px;
+}
+.card h2 {
+  font-size: 1.05rem;
+  font-weight: 700;
+  line-height: 1.4;
+}
+.card p {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  line-height: 1.65;
+  flex: 1;
+}
+.card-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+  margin-top: 2px;
+}
+.tag-chip {
+  font-size: 0.7rem;
+  padding: 2px 8px;
+  border-radius: 20px;
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+}
+.card-arrow {
+  position: absolute;
+  bottom: 18px;
+  right: 20px;
+  font-size: 1rem;
+  color: var(--text-muted);
+  transition: transform 0.2s, color 0.2s;
+}
+.card:hover .card-arrow {
+  transform: translate(3px, -3px);
+  color: var(--text);
+}
+
+/* 플레이스홀더 카드 */
+.card-placeholder {
+  background: transparent;
+  border: 2px dashed rgba(255,255,255,0.07);
+  cursor: default;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  pointer-events: none;
+}
+.card-placeholder:hover { transform: none; box-shadow: none; }
+.card-placeholder::before { display: none; }
+.card-placeholder p { font-size: 0.82rem; color: var(--text-muted); margin-top: 8px; }
+.card-placeholder .plus { font-size: 2rem; color: var(--border); }
+
+/* ── RESPONSIVE ── */
+@media (max-width: 600px) {
+  .hero { padding: 36px 18px 22px; }
+  .hero h1 { font-size: 1.7rem; }
+  .grid { padding: 16px 16px 48px; gap: 14px; }
+  header { padding: 0 16px; }
+}
+```
+
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="logo">
+    <span>2022 개정 물리학</span>
+    <span class="badge">연습 허브</span>
+  </div>
+  <div class="credit">조준현T</div>
+</header>
+
+<div id="hub-view">
+  <div class="hero">
+    <h1>물리학<em> 연습</em></h1>
+    <p>학습하고 싶은 단원 카드를 클릭하세요</p>
+  </div>
+  <div class="grid" id="card-grid"></div>
+</div>
+
+<script>
+  // ════════════════════════════════════════════════
+  //  ★ 프로그램 목록 — 새 프로그램은 여기에 추가 ★
+  // ════════════════════════════════════════════════
+  const PROGRAMS = [
+    {
+      id: 1,
+      icon: "📈",
+      theme: "red",
+      title: "등가속도 운동 시뮬레이터",
+      desc: "구간별 초속도와 가속도를 입력하면 s-t, v-t, a-t 그래프를 자동으로 그려주는 시뮬레이터입니다.",
+      tags: ["등가속도", "s-t 그래프", "v-t 그래프", "a-t 그래프"],
+      url: "https://3le0n.github.io/SIMPSON_Physics2/"
+    },
+    {
+      id: 2,
+      icon: "📐",
+      theme: "green",
+      title: "자유물체도 단계 학습",
+      desc: "수평면 위 2·3물체계의 자유물체도(FBD)를 단계별로 학습하고 직접 풀어보는 프로그램입니다.",
+      tags: ["자유물체도", "FBD", "수평 운동", "3물체"],
+      url: "https://3le0n.github.io/SIMPSON_Physics3/"
+    },
+    {
+      id: 3,
+      icon: "⚙️",
+      theme: "blue",
+      title: "물체계의 운동 (도르래)",
+      desc: "도르래로 연결된 물체의 가속도와 장력을 구하는 연습 문제. 레벨에 따라 3단계 난이도가 적용됩니다.",
+      tags: ["도르래", "장력", "가속도", "뉴턴 2법칙"],
+      url: "https://3le0n.github.io/SIMPSON_Physics/"
+    },
+    // ─────────────────────────────────────────────────
+    // 새 프로그램 추가 예시 (아래 주석 해제 후 수정):
+    // {
+    //   id: 4,
+    //   icon: "🔭",
+    //   theme: "yellow",        // blue / red / green / yellow
+    //   title: "프로그램 제목",
+    //   desc: "프로그램 설명을 여기에 입력하세요.",
+    //   tags: ["태그1", "태그2"],
+    //   url: "https://3le0n.github.io/SIMPSON_Physics4/"
+    // },
+    // ─────────────────────────────────────────────────
+  ];
+
+  function renderCards() {
+    const grid = document.getElementById('card-grid');
+    grid.innerHTML = '';
+
+    PROGRAMS.forEach(prog => {
+      // <a> 태그로 만들어 새 탭에서 열기 (iframe 차단 우회)
+      const card = document.createElement('a');
+      card.className = 'card';
+      card.setAttribute('data-theme', prog.theme);
+      card.href = prog.url;
+      card.target = '_blank';
+      card.rel = 'noopener noreferrer';
+      card.innerHTML = `
+        <div class="card-top">
+          <span class="card-icon">${prog.icon}</span>
+          <span class="card-num">NO.${String(prog.id).padStart(2,'0')}</span>
+        </div>
+        <h2>${prog.title}</h2>
+        <p>${prog.desc}</p>
+        <div class="card-tags">${prog.tags.map(t=>`<span class="tag-chip">${t}</span>`).join('')}</div>
+        <span class="card-arrow">↗</span>
+      `;
+      grid.appendChild(card);
+    });
+
+    // 추가 예정 플레이스홀더
+    const ph = document.createElement('div');
+    ph.className = 'card card-placeholder';
+    ph.innerHTML = `<span class="plus">＋</span><p>새 프로그램 추가 예정</p>`;
+    grid.appendChild(ph);
+  }
+
+  renderCards();
+</script>
+
+</body>
+</html>
