@@ -41,11 +41,23 @@
       padding:0 20px; height:58px; display:flex; align-items:center;
       justify-content:space-between; position:sticky; top:0; z-index:200;
     }
-    .hub-header-logo {
-      height:32px; width:auto; opacity:0.88;
-      filter:drop-shadow(0 0 10px rgba(79,158,255,0.18));
-      max-width:min(260px, 55vw);
-    }
+/* ══ 허브 화면 로고 스타일 수정 ══ */
+.hub-header-logo {
+  height: 40px; /* 원하는 높이로 조정 가능 (기존 32px에서 약간 키움) */
+  width: auto;  /* 너비는 비율에 맞게 자동 설정 */
+  display: block;
+  object-fit: contain; /* 비율 유지하며 영역 내 배치 */
+  opacity: 0.88;
+  filter: drop-shadow(0 0 10px rgba(79,158,255,0.18));
+  max-width: 100%; /* 부모 요소 너비를 넘지 않도록 제한 */
+}
+
+/* 모바일 대응 (반응형) */
+@media(max-width:600px){
+  .hub-header-logo {
+    height: 30px; /* 모바일에서는 조금 더 작게 조정 */
+  }
+}
     .hub-credit{font-size:0.88rem;color:var(--accent4);font-weight:700;flex-shrink:0;}
     .hero{padding:36px 32px 24px;text-align:center;position:relative;}
     .hero::before{content:'';position:absolute;top:0;left:50%;transform:translateX(-50%);width:700px;height:200px;background:radial-gradient(ellipse at center,rgba(79,158,255,0.10) 0%,transparent 70%);pointer-events:none;}
